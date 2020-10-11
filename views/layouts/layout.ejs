@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>New Sails App</title>
+    <title>milestone</title>
 
     <!-- Viewport mobile tag for sensible mobile support -->
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css"> 
     <%/* If you want to discourage search engines from indexing this site, uncomment the following line: */%>
     <%/* <meta name="robots" content="noindex"> */%>
 
@@ -32,11 +32,20 @@
     -->
 
     <!--STYLES-->
+    <link rel="stylesheet" href="/styles/importer.css">
     <!--STYLES END-->
   </head>
 
   <body>
-    <%- body %>
+    <section class="section">
+      <div class="container columns is-centered">
+          <div class="column">
+  
+              <%- body %>
+  
+          </div>
+      </div>
+    </section>
 
 
 
@@ -105,6 +114,17 @@
     -->
 
     <!--SCRIPTS-->
+    <script src="/dependencies/sails.io.js"></script>
     <!--SCRIPTS END-->
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
   </body>
+
+  <footer class="footer">
+    <div class="content has-text-centered">
+      <p>
+        <strong>Comp7270 milestone project</strong> by Allan XUYu ,Student ID:20416601.
+        
+      </p>
+    </div>
+  </footer>
 </html>

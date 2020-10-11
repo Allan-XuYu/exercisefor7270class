@@ -19,7 +19,7 @@ module.exports.routes = {
   *                                                                          *
   ***************************************************************************/
 
-  '/': { view: 'pages/homepage' },
+  '/': { view: 'oolong/index' },
 
 
   /***************************************************************************
@@ -33,5 +33,8 @@ module.exports.routes = {
   *                                                                          *
   ***************************************************************************/
 
-
+ 'GET /oolong/create': 'oolongController.create',
+ 'POST /oolong/create': 'oolongController.create',
+ 'GET /oolong/index': 'oolongController.index',
+ 'POST /oolong/index': 'oolongController.index',
 };
