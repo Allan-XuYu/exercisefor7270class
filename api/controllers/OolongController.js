@@ -6,7 +6,7 @@
  */
 
 module.exports = {
-    // action - create
+    // create new restaurant
     create: async function (req, res) {
 
         if (req.method == "GET") return res.view('oolong/create');
@@ -15,7 +15,7 @@ module.exports = {
 
         return res.status(201).json({ id: oolong.id });
     },
-    // index page by create action
+    // Homepage page by create action
     index : async function (req, res) {
 
         if (req.method == "GET") return res.view('oolong/index');
@@ -24,6 +24,20 @@ module.exports = {
     
         return res.status(201).json({ id: oolong.id });
     },
+    // json function
+    json: async function (req, res) {
 
+        var everyones = await Oolong.find();
+
+        return res.json(everyones);
+    },
+
+    // action - list for admin page
+    admin: async function (req, res) {
+
+        var restaurants = await Oolong.find();
+        
+        return res.view('oolong/admin', { infos: restaurants });
+    },
 };
 

@@ -37,4 +37,9 @@ module.exports.routes = {
  'POST /oolong/create': 'oolongController.create',
  'GET /oolong/index': 'oolongController.index',
  'POST /oolong/index': 'oolongController.index',
+
+ 'GET /oolong': 'oolongController.admin',
+ 'GET /oolong/admin': 'oolongController.admin',
+ 'GET /oolong/json': 'oolongController.json',
+
 };

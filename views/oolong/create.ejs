@@ -1,24 +1,155 @@
 <!--create.ejs-->
 <form action="/oolong/create" method="post">
+    <div class="columns"> 
+        <div class="column is-half">
+            <div class="field">
+                <label class="label">Title</label>
+                <div class="control">
+                    <input class="input" type="text" name="Title" required>
+                </div>
+            </div>
 
-    <div class="field">
-        <label class="label">Name</label>
-        <div class="control">
-            <input class="input" type="text" name="name" required>
+            <div class="field">
+                <label class="label">Restaurant</label>
+                <div class="control">
+                    <input class="input" type="text" name="Restaurant" required>
+                </div>
+            </div>
+
+            <div class="columns">
+                <div class="column">
+                    <div class="field">
+                        <label class="label">Region</label>
+                        <div class="control">
+                            <div class="select">
+                                <select name="Region" onchange="RegionSelected(this.value)">
+                                    <!-- this.value -->>
+                                    <option value=""> </option>
+                                    <option value="Kowloon">Kowloon</option>
+                                    <option value="HK Island">HK Island</option>
+                                    <option value="New Territories">New Territories</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="column">
+                    <div class="field">
+                        <label class="label">Mall</label>
+                        <div class="control">
+                            <div class="select">
+                                <select name="Mall" id="mall">
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="field">
+                <label class="label">Image</label>
+                <div class="control">
+                    <input class="input" type="text" name="Image" required>
+                </div>
+            </div>
+
+
         </div>
+
+        <div class="column is-half">
+
+            <div class="columns">
+                <div class="column is-half">
+                    <div class="field">
+                        <label class="label">Quata</label>
+                        <div class="control">
+                            <input class="input" type="text" name="Quata" required>
+                        </div>
+                    </div> 
+                </div>
+
+                <div class="column is-half">
+                    <div class="field">
+                        <label class="label">Coins</label>
+                        <div class="control">
+                            <input class="input" type="text" name="Coins" required>
+                        </div>
+                    </div> 
+                </div>  
+            </div>
+
+            <div class="field">
+                <label class="label">Deal Valid</label>
+                <div class="control">
+                    <input class="input" type="date" name="Deal_Valid_Till" required>
+                </div>
+            </div> 
+
+            <div class="field">
+                <label class="label">Detail</label>
+                <div class="control">
+                    <input class="input" type="text" name="Detail" required>
+                </div>
+            </div> 
+
+            <div class="column">
+                <div class="field">
+                    <div class="control">
+                        <button class="button is-link" type="submit">Submit</button>
+                    </div>
+                </div>
+            </div>
+
+        </div> 
     </div>
 
-    <div class="field">
-        <label class="label">Age</label>
-        <div class="control">
-            <input class="input" type="number" name="age" required>
-        </div>
-    </div>
+    <script>
+        var Kowloon= ["First", "Second"];
+        var HK_Island = ["THREE", "FOUR"];  
+        var New_Territories = ["FIVE","SIX"];
 
-    <div class="field">
-        <div class="control">
-            <button class="button is-link" type="submit">Submit</button>
-        </div>
-    </div>
+        function RegionSelected(region) {
+        //alert(team);
+            var mallElem = document.getElementById("mall");
+            mallElem.options.length = 0;
 
+            if (region == "Kowloon") {
+                Kowloon.forEach(function (item) {
+                    var option = document.createElement("option");
+                    option.text = item;
+                    option.value = item;
+                    mallElem.add(option);
+                });
+
+                mallElem.disabled = false;
+
+                } else if (region == "HK Island") {
+
+                HK_Island.forEach(function (item) {
+                    var option = document.createElement("option");
+                    option.text = item;
+                    option.value = item;
+                    mallElem.add(option);
+                });
+
+                mallElem.disabled = false; //flag
+
+                } else if (region == "New Territories") {
+
+                New_Territories.forEach(function (item) {
+                    var option = document.createElement("option");
+                    option.text = item;
+                    option.value = item;
+                    mallElem.add(option);
+                });
+
+                mallElem.disabled = false; //flag
+
+                } else {
+
+                mallElem.disabled = true; //flag switch to disabled select
+            }
+        }
+    </script>
 </form>
