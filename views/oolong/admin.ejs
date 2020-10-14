@@ -1,9 +1,14 @@
 <table class="table is-bordered is-striped is-hoverable is-fullwidth">
-    
+
+    <tr><td>ID</td><td>Title</td><td>Restaurant</td><td></td><td></td></tr>
     <% infos.forEach( function(info) { %>
     
-        <tr><td>ID</td><td>Title</td><td>Restaurant</td><td></td></tr>
-        <tr><td><%= info.id %></td><td><%= info.Title %></td><td><%= info.Restaurant %></td><td><a href="/">Update</a></td></tr>
+        <tr><td><%= info.id %></td><td><%= info.Title %></td><td><%= info.Restaurant %></td><td><a href="/oolong/update/<%= info.id %>">Update</a></td><td>
+
+            <form action="/oolong/delete/<%= info.id %>" method="POST">
+                <button class="button is-danger" type="submit">Delete</button>
+            </form>
+        </td></tr>
     
     <% }); %>
 

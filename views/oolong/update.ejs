@@ -1,18 +1,18 @@
-<!--create.ejs-->
-<form action="/oolong/create" method="post">
+<!--update.ejs-->
+<form action="/oolong/update/<%= info.id %>" method="post">
     <div class="columns"> 
         <div class="column is-half">
             <div class="field">
                 <label class="label">Title</label>
                 <div class="control">
-                    <input class="input" type="text" name="Title" required>
+                    <input class="input" type="text" name="Title" value="<%= info.Title %>" required>
                 </div>
             </div>
 
             <div class="field">
                 <label class="label">Restaurant</label>
                 <div class="control">
-                    <input class="input" type="text" name="Restaurant" required>
+                    <input class="input" type="text" name="Restaurant" value="<%= info.Restaurant %>" required>
                 </div>
             </div>
 
@@ -23,7 +23,7 @@
                         <div class="control">
                             <div class="select">
                                 <select name="Region" onchange="RegionSelected(this.value)" required>
-                                    <!-- this.value -->>
+                                    <!-- this.value -->
                                     <option value=""></option>
                                     <option value="Kowloon">Kowloon</option>
                                     <option value="HK Island">HK Island</option>
@@ -39,7 +39,7 @@
                         <label class="label">Mall</label>
                         <div class="control">
                             <div class="select">
-                                <select name="Mall" id="mall"  disabled required>
+                                <select name="Mall" id="mall" required> 
                                 </select>
                             </div>
                         </div>
@@ -50,7 +50,7 @@
             <div class="field">
                 <label class="label">Image</label>
                 <div class="control">
-                    <input class="input" type="text" name="Image" required>
+                    <input class="input" type="text" name="Image" value="<%= info.Image %>" required>
                 </div>
             </div>
 
@@ -64,7 +64,7 @@
                     <div class="field">
                         <label class="label">Quata</label>
                         <div class="control">
-                            <input class="input" type="number" name="Quata" required>
+                            <input class="input" type="number" name="Quata" value="<%= info.Quata %>" required>
                         </div>
                     </div> 
                 </div>
@@ -73,7 +73,7 @@
                     <div class="field">
                         <label class="label">Coins</label>
                         <div class="control">
-                            <input class="input" type="number" name="Coins" required>
+                            <input class="input" type="number" name="Coins" value="<%= info.Coins %>" required>
                         </div>
                     </div> 
                 </div>  
@@ -82,14 +82,14 @@
             <div class="field">
                 <label class="label">Deal Valid</label>
                 <div class="control">
-                    <input class="input" type="date" name="Deal_Valid_Till" required>
+                    <input class="input" type="date" name="Deal_Valid_Till" value="<%= info.Deal_Valid_Till %>" required>
                 </div>
             </div> 
 
             <div class="field">
                 <label class="label">Detail</label>
                 <div class="control">
-                    <input class="input" type="text" name="Detail" required>
+                    <input class="input" type="text" name="Detail" value="<%= info.Detail %>" required>
                 </div>
             </div> 
 
@@ -97,8 +97,8 @@
                 <div class="field">
                     <div class="control">
                         <button class="button is-link" type="submit">Submit</button>
-                    </div>
-                </div>
+                    </div>    
+                </div>             
             </div>
 
         </div> 
@@ -151,5 +151,6 @@
                 mallElem.disabled = true; //flag switch to disabled select
             }
         }
+
     </script>
 </form>

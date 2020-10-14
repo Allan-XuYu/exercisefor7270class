@@ -33,13 +33,19 @@ module.exports.routes = {
   *                                                                          *
   ***************************************************************************/
 
- 'GET /oolong/create': 'oolongController.create',
- 'POST /oolong/create': 'oolongController.create',
- 'GET /oolong/index': 'oolongController.index',
- 'POST /oolong/index': 'oolongController.index',
+ 'GET /oolong/create': 'OolongController.create',
+ 'POST /oolong/create': 'OolongController.create',
 
- 'GET /oolong': 'oolongController.admin',
- 'GET /oolong/admin': 'oolongController.admin',
- 'GET /oolong/json': 'oolongController.json',
+ 'GET /oolong/index': 'OolongController.index',
+ 'POST /oolong/index': 'OolongController.index',
 
+ 'GET /oolong': 'OolongController.admin',
+ 'GET /oolong/admin': 'OolongController.admin',
+
+ 'GET /oolong/json': 'OolongController.json',
+
+ 'GET /oolong/update/:id': 'OolongController.update',
+ 'POST /oolong/update/:id': 'OolongController.update',
+
+ 'POST /oolong/delete/:id': 'OolongController.delete', // all access DB just using POST
 };
