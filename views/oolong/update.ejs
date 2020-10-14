@@ -24,7 +24,7 @@
                             <div class="select">
                                 <select name="Region" onchange="RegionSelected(this.value)" required>
                                     <!-- this.value -->
-                                    <option value=""></option>
+                                    <option value="<%= info.Region %>"><%= info.Region %></option>
                                     <option value="Kowloon">Kowloon</option>
                                     <option value="HK Island">HK Island</option>
                                     <option value="New Territories">New Territories</option>
@@ -39,7 +39,8 @@
                         <label class="label">Mall</label>
                         <div class="control">
                             <div class="select">
-                                <select name="Mall" id="mall" required> 
+                                <select name="Mall" id="mall" required>
+                                    <option value="<%= info.Mall %>"><%= info.Mall %></option> 
                                 </select>
                             </div>
                         </div>
@@ -153,4 +154,10 @@
         }
 
     </script>
+</form>
+
+<form action="/oolong/delete/<%= info.id %>" method="POST">
+    <div class="column">
+        <button class="button is-danger" type="submit">Delete</button>
+    </div>
 </form>
