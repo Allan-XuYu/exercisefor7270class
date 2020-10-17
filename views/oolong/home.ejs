@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Hello Bulma!</title>
+
+    <style>
+        #RestaurantDetail{ color:rgb(0, 7, 12)}
+        #RestaurantCoins{ color:rgb(0, 7, 12)}
+    </style>
+
+  </head>
+
+  <body>
+    <section class="hero is-primary">
+        <div class="hero-body">
+          <div class="container">
+            <h1 class="title">
+              a~~~o~~~~
+            </h1>
+            <h2 class="subtitle">
+              Pls show mercy~~ 
+            </h2>
+          </div>
+        </div>
+      </section>
+
+    <section>
+        <div class="container">
+        <div class="columns">
+            <div class="column card">
+                HK Island 
+                <a href='/oolong/detail/<%= INFO_toHomeP.HK_ID1 %>'>
+                    <div class="column">
+                        <figure class="image is-square">
+                            <img style="object-fit:cover" src="<%= INFO_toHomeP.HK_Image1 %>" />
+                        </figure>
+                        <div class="notification">
+                            <div class="content is-medium" id="RestaurantName">           
+                                <%= INFO_toHomeP.HK_Restaurant1 %>
+                            </div>  
+                            <div class="content is-small" id="RestaurantDetail">
+                                <%= INFO_toHomeP.HK_Detail1 %>
+                            </div>
+                            <div class="content is-small" id="RestaurantCoins">
+                                Coins:<%= INFO_toHomeP.HK_Coins1 %>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+
+                <a href='/oolong/detail/<%= INFO_toHomeP.HK_ID2 %>'>    
+                    <div class="column"> 
+                        <figure class="image is-square">
+                            <img style="object-fit:cover" src="<%= INFO_toHomeP.HK_Image2 %>" />
+                        </figure>
+                        <div class="notification">
+                            <div class="content is-medium" id="RestaurantName">
+                                <%= INFO_toHomeP.HK_Restaurant2 %>
+                            </div>
+                            <div class="content is-small" id="RestaurantDetail">
+                                <%= INFO_toHomeP.HK_Detail2 %>
+                            </div>
+                            <div class="content is-small" id="RestaurantCoins">
+                                Coins:<%= INFO_toHomeP.HK_Coins2 %>
+                            </div>  
+                        </div>        
+                    </div>
+                </a>
+            </div>
+            
+            <div class="column card">
+                Kowloon
+                <a href='/oolong/detail/<%= INFO_toHomeP.KW_ID1 %>'>
+                    <div class="column">
+                        <figure class="image is-square">
+                            <img style="object-fit:cover" src="<%= INFO_toHomeP.KW_Image1 %>" />
+                        </figure>
+                        <div class="notification">
+                            <div class="content is-medium" id="RestaurantName">           
+                                <%= INFO_toHomeP.KW_Restaurant1 %>
+                            </div>  
+                            <div class="content is-small" id="RestaurantDetail">
+                                <%= INFO_toHomeP.KW_Detail1 %>
+                            </div>
+                            <div class="content is-small" id="RestaurantCoins">
+                                Coins:<%= INFO_toHomeP.KW_Coins1 %>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                
+                <a href='/oolong/detail/<%= INFO_toHomeP.KW_ID2 %>'>    
+                    <div class="column"> 
+                        <figure class="image is-square">
+                            <img style="object-fit:cover" src="<%= INFO_toHomeP.KW_Image2 %>" />
+                        </figure>
+                        <div class="notification">
+                            <div class="content is-medium" id="RestaurantName">
+                                <%= INFO_toHomeP.KW_Restaurant2 %>
+                            </div>
+                            <div class="content is-small" id="RestaurantDetail">
+                                <%= INFO_toHomeP.KW_Detail2 %>
+                            </div>
+                            <div class="content is-small" id="RestaurantCoins">
+                                Coins:<%= INFO_toHomeP.KW_Coins2 %>
+                            </div>  
+                        </div>        
+                    </div>
+                </a>
+            </div>
+        
+            <div class="column card">
+                New Territories
+                <a href='/oolong/detail/<%= INFO_toHomeP.NT_ID1 %>'>
+                    <div class="column">
+                        <figure class="image is-square">
+                            <img style="object-fit:cover" src="<%= INFO_toHomeP.NT_Image1 %>" />
+                        </figure>
+                        <div class="notification">
+                            <div class="content is-medium" id="RestaurantName">           
+                                <%= INFO_toHomeP.NT_Restaurant1 %>
+                            </div>  
+                            <div class="content is-small" id="RestaurantDetail">
+                                <%= INFO_toHomeP.NT_Detail1 %>
+                            </div>
+                            <div class="content is-small" id="RestaurantCoins">
+                                Coins:<%= INFO_toHomeP.NT_Coins1 %>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+
+                <a href='/oolong/detail/<%= INFO_toHomeP.NT_ID2 %>'>    
+                    <div class="column"> 
+                        <figure class="image is-square">
+                            <img style="object-fit:cover" src="<%= INFO_toHomeP.NT_Image2 %>" />
+                        </figure>
+                        <div class="notification">
+                            <div class="content is-medium" id="RestaurantName">
+                                <%= INFO_toHomeP.NT_Restaurant2 %>
+                            </div>
+                            <div class="content is-small" id="RestaurantDetail">
+                                <%= INFO_toHomeP.NT_Detail2 %>
+                            </div>
+                            <div class="content is-small" id="RestaurantCoins">
+                                Coins:<%= INFO_toHomeP.NT_Coins2 %>
+                            </div>  
+                        </div>        
+                    </div>
+                </a>
+            </div>
+        </div>  
+        </div>
+    </section>
+
+  </body>
+</html>

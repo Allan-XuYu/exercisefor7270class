@@ -19,7 +19,7 @@ module.exports.routes = {
   *                                                                          *
   ***************************************************************************/
 
-  '/': { view: 'oolong/index' },
+  //'/': { view: 'oolong/home' },// visit :1337 by GET home.js, not view , 1016
 
 
   /***************************************************************************
@@ -36,8 +36,9 @@ module.exports.routes = {
  'GET /oolong/create': 'OolongController.create',
  'POST /oolong/create': 'OolongController.create',
 
- 'GET /oolong/index': 'OolongController.index',
- 'POST /oolong/index': 'OolongController.index',
+ 'GET /': 'OolongController.home', // visit :1337 by GET home.js, not view, 1016
+ 'GET /oolong/home': 'OolongController.home',
+ 'POST /oolong/home': 'OolongController.home',
 
  'GET /oolong': 'OolongController.admin',
  'GET /oolong/admin': 'OolongController.admin',
@@ -48,4 +49,7 @@ module.exports.routes = {
  'POST /oolong/update/:id': 'OolongController.update',
 
  'POST /oolong/delete/:id': 'OolongController.delete', // all access DB just using POST
+ 
+ 'GET /oolong/detail/:id': 'OolongController.detail',
+
 };
