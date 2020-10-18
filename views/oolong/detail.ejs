@@ -1,1 +1,19 @@
-<%= info.Restaurant %>
+<div class="columns">
+    <div class="column is-two-thirds">
+        <figure class="image is-square">
+            <img style="object-fit:cover" src="<%= info.Image %>" />
+        </figure>
+    </div>
+    <div class="column">
+        <div class="content">
+            <ul>
+              <li><h4><%= info.Restaurant %></h4></li>
+              <li><h4><%= info.Title %></h4></li>
+              <li><h4>Coins:</h4><%= info.Coins %></li>
+              <li><h4>Address:</h4><%= info.Mall %>,<%= info.Region %></li>
+              <li><h4>Valid Till:</h4><%= info.Deal_Valid_Till %></li>
+              <li><%= info.Detail %></li>
+            </ul>
+          </div>
+    </div>
+  </div>
