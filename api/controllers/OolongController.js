@@ -246,7 +246,7 @@ module.exports = {
             where: whereClause, //dynamic  not use {name:"xxx",age:20}
             limit: limit, // display two record
             skip: offset,
-            sort: 'createdAt' // ordinal , + DESC to switch
+            sort: 'createdAt DESC' // ordinal , + DESC to switch
         });
         // for count all search result
         var CountRecord = await Oolong.find({
