@@ -1,0 +1,181 @@
+<!--paginate.ejs-->
+<style>
+    #RestaurantDetail{ color:rgb(0, 7, 12)}
+    #RestaurantCoins{ color:rgb(0, 7, 12)}
+</style>
+<div class="columns">
+    <% infos.forEach( function(info) { %>
+    <div class="column card">
+        <a href='/oolong/detail/<%= info.id %>'>
+            <div class="column">
+                <figure class="image is-square">
+                    <img style="object-fit:cover" src="<%= info.Image %>" />
+                </figure>
+                <div class="notification">
+                    <div class="content is-medium" id="RestaurantName">           
+                        <%= info.Restaurant %>
+                    </div>  
+                    <div class="content is-small" id="RestaurantDetail">
+                        <%= info.Title %>
+                    </div>
+                    <div class="content is-small" id="RestaurantCoins">
+                        Coins:<%= info.Coins %>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+    <% }); %>
+    <div class="column">
+        <form>
+            
+            <div class="field">
+                <label class="label">Region</label>
+                <div class="control">
+                    <div class="select">
+                        <select name="Region" onchange="RegionSelected(this.value)" id='Region'>
+                            <!-- this.value -->>
+                            <option value="">Not Specified</option>
+                            <option value="Kowloon">Kowloon</option>
+                            <option value="HK Island">HK Island</option>
+                            <option value="New Territories">New Territories</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            
+        
+            <div class="field">
+                <label class="label">Min Coins</label>
+                <div class="control">
+                    <input class="input" type="number" name="MinCoins" id='MIN'>
+                </div>
+            </div> 
+
+            <div class="field">
+                <label class="label">Max Coins</label>
+                <div class="control">
+                    <input class="input" type="number" name="MaxCoins" id='MAX'>
+                </div>
+            </div>
+            
+            <div class="field">
+                <label class="label">Deal Valid Till</label>
+                <div class="control">
+                    <input class="input" type="date" name="Deal_Valid_Till" id='Date'>
+                </div>
+            </div> 
+
+            <div class="field">
+                <div class="buttons">
+                    <button class="button is-link" type="button" onclick="clickSearch()">
+                        Search
+                    </button>
+                </div>
+            </div>
+            
+        </form>
+
+    </div>
+</div>
+
+
+
+<nav class="pagination" role="navigation" aria-label="pagination">
+    <a class="pagination-previous" id="previousButton">Previous</a>
+    <a class="pagination-next" id="nextButton">Next page</a>
+    <ul class="pagination-list">
+        <li>
+            <a class="pagination-link" id="firstLink">1</a>
+        </li>
+        <li>
+            <span class="pagination-ellipsis">&hellip;</span>
+        </li>
+        <li>
+            <a class="pagination-link" id="previousLink">45</a>
+        </li>
+        <li>
+            <a class="pagination-link is-current" id="currentLink">46</a>
+        </li>
+        <li>
+            <a class="pagination-link" id="nextLink">47</a>
+        </li>
+        <li>
+            <span class="pagination-ellipsis">&hellip;</span>
+        </li>
+        <li>
+            <a class="pagination-link" id="lastLink">86</a>
+        </li>
+    </ul>
+</nav>
+
+<script>
+    function setPagination() {
+
+        var previousButton = document.getElementById("previousButton");
+        var nextButton = document.getElementById("nextButton");
+        var currentLink = document.getElementById("currentLink");
+        var previousLink = document.getElementById("previousLink");
+        var nextLink = document.getElementById("nextLink");
+        var firstLink = document.getElementById("firstLink");
+        var lastLink = document.getElementById("lastLink");
+
+        var numOfRecords = parseInt("<%= numOfRecords %>");
+        //var numOfRecords =2;
+        var limit = Math.max(parseInt("<%= req.query.limit %>"), 2) || 2; // ||2 display 2 item at least
+        var offset = Math.max(parseInt("<%= req.query.offset %>"), 0) || 0; // 
+        var region = '<%= req.query.Region %>';
+        var min='<%= req.query.MinCoins %>';
+        var max='<%= req.query.MaxCoins %>';
+        var date='<%= req.query.Deal_Valid_Till %>';
+        //var baseUrl = "/oolong/paginate?limit=" + limit + "&offset=";
+        //region= document.getElementById('Region').value;
+        //min= document.getElementById('MIN').value;
+        //max= document.getElementById('MAX').value;
+        //date= document.getElementById('Date').value;
+        var baseUrl = '/oolong/search?Region='+region+'&MinCoins='+min+'&MaxCoins='+max+'&Deal_Valid_Till='+date + "&limit=" + limit +"&offset=";
+        
+
+        firstLink.href = baseUrl + 0;
+        previousButton.href = baseUrl + (offset - limit);
+        previousLink.href = baseUrl + (offset - limit);
+        currentLink.href = baseUrl + offset;
+        nextLink.href = baseUrl + (offset + limit);
+        nextButton.href = baseUrl + (offset + limit);
+        lastLink.href = baseUrl + (Math.ceil(numOfRecords / limit) - 1) * limit;
+              
+        var currentPageNumber = Math.floor(offset / limit) + 1;
+
+        previousLink.innerHTML = currentPageNumber - 1;
+        currentLink.innerHTML = currentPageNumber;
+        nextLink.innerHTML = currentPageNumber + 1;
+        lastLink.innerHTML = Math.ceil(numOfRecords / limit); 
+        // unable previous button
+        if (offset < limit) {
+            previousButton.setAttribute("disabled", true);
+            previousButton.href = "";
+            previousLink.style.display = "none";
+        }
+        // unable next button
+        if (offset + limit >= numOfRecords) {
+            nextButton.setAttribute("disabled", true);
+            nextButton.href = "";
+            nextLink.style.display = "none";
+        }
+    }
+
+    setPagination();
+
+    function clickSearch()
+    {
+        region= document.getElementById('Region').value;
+        min= document.getElementById('MIN').value;
+        max= document.getElementById('MAX').value;
+        date= document.getElementById('Date').value;
+   
+       // window.location.href='/oolong/search?Region='+region;
+        window.location.href='/oolong/search?Region='+region+'&MinCoins='+min+'&MaxCoins='+max+'&Deal_Valid_Till='+date+"&limit=2" + '&offset=0';
+    }
+
+</script>
+

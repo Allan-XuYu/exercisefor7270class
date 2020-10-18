@@ -142,7 +142,7 @@ module.exports = {
         }); 
 
         
-        console.log(INFO); // for debug
+       // console.log(INFO); // for debug
         return res.view('oolong/home', { INFO_toHomeP: INFO}); 
         
     },
@@ -203,6 +203,60 @@ module.exports = {
 
             return res.view('oolong/detail', { info: thatInfo });// return page with Oject info, .view handle render
 
+    },
+
+    // action - paginate
+    // paginate: async function (req, res) {
+
+    //     var limit = Math.max(req.query.limit, 2) || 2; // num of ojects
+    //     var offset = Math.max(req.query.offset, 0) || 0; // start point
+
+    //     var somePersons = await Oolong.find({  // find from DB
+    //         limit: limit, //
+    //         skip: offset  //
+    //     });
+
+    //     var count = await Oolong.count();
+
+    //     return res.view('oolong/paginate', { infos: somePersons, numOfRecords: count });// all record
+    // },
+
+    // Search result
+    Search: async function (req, res) {
+
+        var whereClause = {};//matching object
+        
+        if ((req.query.Region)&&(req.query.Region!="Not Specified")) whereClause.Region = { contains: req.query.Region };
+        if (req.query.Deal_Valid_Till) whereClause.Deal_Valid_Till = {'>=': req.query.Deal_Valid_Till };
+        // Coins interval
+        if(req.query.MinCoins)
+        {
+            var parsedMinCoins = parseInt(req.query.MinCoins);
+            if (!isNaN(parsedMinCoins)) whereClause.Coins = { '>=': req.query.MinCoins }; // if it's tru
+        }
+        if(req.query.MaxCoins)
+        {
+        var parsedMaxCoins = parseInt(req.query.MaxCoins);
+        if (!isNaN(parsedMaxCoins)) whereClause.Coins = { '<=': req.query.MaxCoins }; // if it's true , bulabula...
+        }
+
+        var limit = Math.max(req.query.limit, 2) || 2; // num of ojects
+        var offset = Math.max(req.query.offset, 0) || 0;
+        var thoseinfos = await Oolong.find({
+            where: whereClause, //dynamic  not use {name:"xxx",age:20}
+            limit: limit, // display two record
+            skip: offset,
+            sort: 'createdAt' // ordinal , + DESC to switch
+        });
+        // for count all search result
+        var CountRecord = await Oolong.find({
+            where: whereClause, //dynamic  not use {name:"xxx",age:20}
+        });
+       // console.log(thoseinfos);// for debug
+       // console.log(CountRecord.length);// for debug
+
+        //res.view('oolong/search',{infos: thoseinfos, numOfRecords: thoseinfos.length });
+        res.view('oolong/paginate', { infos: thoseinfos, numOfRecords: CountRecord.length });
     },
 };
 

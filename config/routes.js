@@ -52,4 +52,8 @@ module.exports.routes = {
  
  'GET /oolong/detail/:id': 'OolongController.detail',
 
+ 'POST /oolong/search': 'OolongController.search',
+ 'GET /oolong/search': 'OolongController.search',
+ //'GET /oolong/paginate': 'OolongController.search'
+
 };
