@@ -26,10 +26,11 @@ module.exports.bootstrap = async function() {
   //   // etc.
   // ]);
   // ```
-
+  sails.bcrypt = require('bcryptjs');
+  var salt = await sails.bcrypt.genSalt(10);
 
   if (await Oolong.count() > 0) { 
-    return;
+    return generateUsers(); // generate users after dataitems read.
   }
   
   await Oolong.createEach([
@@ -41,4 +42,22 @@ module.exports.bootstrap = async function() {
     { Title: "Public Holiday 20% discount for all food", Restaurant:'Tanyu',Region:'New Territories',Mall:'Tsuen Wan Plaza',Image:'http://129.204.236.214:8089/tanyu.jpeg',Quata:'400',Coins:'500',Deal_Valid_Till:'2020-12-26',Detail:'Student discount'},
     // etc.
   ]);
+
+  return generateUsers();
+  
+  async function generateUsers() {
+  
+    if (await User.count() > 0) {
+      return;
+    }
+
+    var hash = await sails.bcrypt.hash('123456', salt);
+    await User.createEach([
+      { username: "admin", password: hash },
+      { username: "boss", password: hash }
+      // etc.
+    ]);
+  }
+
+  
 };

@@ -140,7 +140,6 @@ module.exports = {
             {console.log('Region error');}
            
         }); 
-
         
        // console.log(INFO); // for debug
         return res.view('oolong/home', { INFO_toHomeP: INFO}); 
@@ -258,5 +257,6 @@ module.exports = {
         //res.view('oolong/search',{infos: thoseinfos, numOfRecords: thoseinfos.length });
         res.view('oolong/paginate', { infos: thoseinfos, numOfRecords: CountRecord.length });
     },
+
 };
 

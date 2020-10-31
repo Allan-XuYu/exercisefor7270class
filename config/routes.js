@@ -56,4 +56,10 @@ module.exports.routes = {
  'GET /oolong/search': 'OolongController.search',
  //'GET /oolong/paginate': 'OolongController.search'
 
+
+  'GET /user': 'UserController.login',
+  'GET /user/login': 'UserController.login',
+  'POST /user/login': 'UserController.login',
+  'POST /user/logout': 'UserController.logout',
+  'GET /user/logout': 'UserController.logout',
 };

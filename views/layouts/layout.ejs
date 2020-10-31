@@ -59,11 +59,11 @@
           Search
         </a>
 
-        <a class="navbar-item" href="/oolong/create">
+        <a class="navbar-item" href="/oolong/create" id="create">
           Create
         </a>
   
-        <a class="navbar-item" href="/oolong/admin">
+        <a class="navbar-item" href="/oolong/admin" id="admin">
           Admin
         </a>
 
@@ -72,10 +72,13 @@
       <div class="navbar-end">
         <div class="navbar-item">
           <div class="buttons">
-            <a class="button is-primary">
+            <div class="content" id="client name">
+               Hi,<%= req.session.username %>
+            </div>
+            <a class="button is-primary" id="sign">
               <strong>Sign up</strong>
             </a>
-            <a class="button is-light">
+            <a class="button is-light" id="log" href="/user/login">
               Log in
             </a>
           </div>
@@ -202,6 +205,30 @@
             NavbarHandle.setAttribute("class","navbar-menu is-active");
         }           
     }
+
+    var username = '<%= req.session.username %>';
+
+    if(username) // Logined
+    {
+      var logButton = document.getElementById("log");
+      //logButton.setAttribute("method","POST");
+      logButton.setAttribute("href","/user/logout");
+      logButton.innerHTML='Log out';
+      document.getElementById("sign").setAttribute("style","display:none");
+    }
+    else // Non-member
+    {
+      var logButton = document.getElementById("log");
+      //logButton.setAttribute("method","GET");
+      logButton.setAttribute("href","/user/login");
+      logButton.innerHTML='Login';
+
+      document.getElementById("create").setAttribute("style","display:none");
+      document.getElementById("admin").setAttribute("style","display:none");
+      document.getElementById("client name").setAttribute("style","display:none");
+      
+    } //
+
   </script>
 
 </html>
