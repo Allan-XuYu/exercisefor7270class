@@ -255,7 +255,13 @@ module.exports = {
        // console.log(CountRecord.length);// for debug
 
         //res.view('oolong/search',{infos: thoseinfos, numOfRecords: thoseinfos.length });
-        res.view('oolong/paginate', { infos: thoseinfos, numOfRecords: CountRecord.length });
+        //res.view('oolong/paginate', { infos: thoseinfos, numOfRecords: CountRecord.length });
+        
+        if (req.wantsJSON){
+            return res.json(thoseinfos);	    // res Ajax req and send back json format data
+        } else {
+            return res.view('oolong/paginate', { infos: thoseinfos, numOfRecords: CountRecord.length });			// for normal request
+        }
     },
 
 };
