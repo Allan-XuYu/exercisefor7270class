@@ -12,8 +12,42 @@ module.exports = {
     //  ╔═╗╦═╗╦╔╦╗╦╔╦╗╦╦  ╦╔═╗╔═╗
     //  ╠═╝╠╦╝║║║║║ ║ ║╚╗╔╝║╣ ╚═╗
     //  ╩  ╩╚═╩╩ ╩╩ ╩ ╩ ╚╝ ╚═╝╚═╝
+    Restaurant: {
+      type: "string"
+    },
+    
+    Title: {
+      type: "string"
+    },
 
+    Region: {
+      type: "string"
+    },
+    
+    Mall: {
+      type: "string"
+    },
+    Image: {
+      type: "string"
+    },
+    
+    Quata: {
+      type: "number"
+    },
 
+    Coins: {
+      type: "number"
+    },
+
+    Deal_Valid_Till: {
+      type: "string",
+      columnType:'date'
+    },
+    
+    Detail: {
+      type: "string"
+    },
+    
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
     //  ║╣ ║║║╠╩╗║╣  ║║╚═╗
     //  ╚═╝╩ ╩╚═╝╚═╝═╩╝╚═╝
@@ -23,13 +57,10 @@ module.exports = {
     //  ╠═╣╚═╗╚═╗║ ║║  ║╠═╣ ║ ║║ ║║║║╚═╗
     //  ╩ ╩╚═╝╚═╝╚═╝╚═╝╩╩ ╩ ╩ ╩╚═╝╝╚╝╚═╝
 
-    name: {
-      type: "string"
-    },
-    
-    age: {
-      type: "number"
-    },
+    clients: {
+      collection: 'User',
+      via: 'coupons'
+    }
   },
 
 };

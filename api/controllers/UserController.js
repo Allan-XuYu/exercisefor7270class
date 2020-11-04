@@ -51,7 +51,8 @@ module.exports = {
 
     populate: async function (req, res) {
 
-        var user = await User.findOne(req.params.id).populate("clients");
+        // also change search by username rather than id!
+        var user = await User.findOne({username:req.params.username}).populate("coupons");
     
         if (!user) return res.notFound();
     
@@ -60,35 +61,37 @@ module.exports = {
 
     add: async function (req, res) {
 
-        if (!await User.findOne(req.params.id)) return res.status(404).json("User not found.");
+       
+        var user=await User.findOne({username: req.params.username});  // using username to access DB
+        if (!user) return res.status(404).json("User not found.");
         
-        var thatPerson = await Person.findOne(req.params.fk).populate("consultants", {id: req.params.id});
+        var thatCoupon = await Oolong.findOne(req.params.fk).populate("clients", {id: user.id});
     
-        if (!thatPerson) return res.status(404).json("Person not found.");
+        if (!thatCoupon) return res.status(404).json("Coupon not found.");
             
-        if (thatPerson.consultants.length > 0)
+        if (thatCoupon.clients.length > 0)
             return res.status(409).json("Already added.");   // conflict
         
-        await User.addToCollection(req.params.id, "clients").members(req.params.fk);
+        await User.addToCollection(user.id, "coupons").members(req.params.fk);
     
         return res.ok();
     },
 
-    remove: async function (req, res) {
+    // remove: async function (req, res) {
 
-        if (!await User.findOne(req.params.id)) return res.status(404).json("User not found.");
+    //     if (!await User.findOne(req.params.id)) return res.status(404).json("User not found.");
         
-        var thatPerson = await Person.findOne(req.params.fk).populate("consultants", {id: req.params.id});
+    //     var thatPerson = await Person.findOne(req.params.fk).populate("consultants", {id: req.params.id});
         
-        if (!thatPerson) return res.status(404).json("Person not found.");
+    //     if (!thatPerson) return res.status(404).json("Person not found.");
     
-        if (thatPerson.consultants.length == 0)
-            return res.status(409).json("Nothing to delete.");    // conflict
+    //     if (thatPerson.consultants.length == 0)
+    //         return res.status(409).json("Nothing to delete.");    // conflict
     
-        await User.removeFromCollection(req.params.id, "clients").members(req.params.fk);
+    //     await User.removeFromCollection(req.params.id, "clients").members(req.params.fk);
     
-        return res.ok();
-    },
+    //     return res.ok();
+    // },
 
 };
 

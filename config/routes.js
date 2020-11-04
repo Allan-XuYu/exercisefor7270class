@@ -56,10 +56,15 @@ module.exports.routes = {
  'GET /oolong/search': 'OolongController.search',
  //'GET /oolong/paginate': 'OolongController.search'
 
-
+  //Login/out
   'GET /user': 'UserController.login',
   'GET /user/login': 'UserController.login',
   'POST /user/login': 'UserController.login',
   'POST /user/logout': 'UserController.logout',
   'GET /user/logout': 'UserController.logout',
+  //Association
+  'GET /oolong/:id/clients': 'OolongController.populate',
+  'GET /user/:username/coupons': 'UserController.populate',
+  'POST /user/:username/coupons/add/:fk': 'UserController.add',  // using username replace id
+  'POST /user/:username/coupons/remove/:fk': 'UserController.remove',
 };

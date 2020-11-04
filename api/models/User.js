@@ -43,6 +43,10 @@ module.exports = {
     //  ╠═╣╚═╗╚═╗║ ║║  ║╠═╣ ║ ║║ ║║║║╚═╗
     //  ╩ ╩╚═╝╚═╝╚═╝╚═╝╩╩ ╩ ╩ ╩╚═╝╝╚╝╚═╝
 
+    coupons: {
+      collection: 'Oolong',
+      via: 'clients'
+    },
   },
 
   customToJSON: function() {

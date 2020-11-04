@@ -16,11 +16,27 @@
             </ul>
 
         </div>
-        <div class="field">
-          <div class="control">
-              <button class="button is-link" type="submit">Submit</button>
+        <form action="/user/<%= req.session.username %>/coupons/add/<%= info.id %>" method="post">
+          <div class="field">
+            <div class="control">
+                <button class="button is-link" type="submit" id="button">
+                  Redeem
+                </button>
+            </div>
           </div>
-        </div>
+        </form>
+       
 
     </div>
   </div>
+
+<script>
+  //only member can see redeem button
+  var role = '<%= req.session.role %>';
+  console.log(role);
+  if(role!='member')
+  {
+    document.getElementById("button").style= "display:none";
+  }
+
+</script>

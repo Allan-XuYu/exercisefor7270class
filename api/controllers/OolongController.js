@@ -264,5 +264,14 @@ module.exports = {
         }
     },
 
+    // show client
+    populate: async function (req, res) {
+
+        var restaurant = await Oolong.findOne(req.params.id).populate("clients");
+    
+        if (!restaurant) return res.notFound();
+    
+        return res.json(restaurant);
+    },
 };
 

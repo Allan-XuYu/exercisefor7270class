@@ -29,22 +29,24 @@ module.exports.bootstrap = async function() {
   sails.bcrypt = require('bcryptjs');
   var salt = await sails.bcrypt.genSalt(10);
 
-  if (await Oolong.count() > 0) { 
-    return generateUsers(); // generate users after dataitems read.
+  //defalut restaurants information
+  if (await Oolong.count() == 0) { 
+    await Oolong.createEach([
+      { Title: "50%discount", Restaurant:'Haidilao',Region:'HK Island',Mall:'IFC Mall',Image:'http://129.204.236.214:8089/haidilao.jpeg',Quata:'600',Coins:'700',Deal_Valid_Till:'2020-12-31',Detail:'just feel free to eat hot poooooot'},
+      { Title: "Roast Meat Buy one get one free", Restaurant:'ShaolaDian',Region:'HK Island',Mall:'Pacific Place',Image:'http://129.204.236.214:8089/shaola.jpg',Quata:'400',Coins:'600',Deal_Valid_Till:'2020-12-30',Detail:' Buy one get one free ! '},
+      { Title: "$20 discount for $500", Restaurant:'Diandude',Region:'Kowloon',Mall:'Elements"',Image:'http://129.204.236.214:8089/diandude.jpg',Quata:'400',Coins:'500',Deal_Valid_Till:'2020-12-29',Detail:'Traditional Guangdong cuision'},
+      { Title: "KFC Children's package with toys!", Restaurant:'KFC',Region:'Kowloon',Mall:'Harbour City',Image:'http://129.204.236.214:8089/kfc.jpg',Quata:'300',Coins:'500',Deal_Valid_Till:'2020-12-28',Detail:'Welcome to'},
+      { Title: "30% Discount for family combo", Restaurant:'Seafood of Japanese cuisine',Region:'New Territories',Mall:'New Town Plaza',Image:'http://129.204.236.214:8089/japaneseSeafood.jpg',Quata:'400',Coins:'500',Deal_Valid_Till:'2020-12-27',Detail:'for family(over 4 people) '},
+      { Title: "Public Holiday 20% discount for all food", Restaurant:'Tanyu',Region:'New Territories',Mall:'Tsuen Wan Plaza',Image:'http://129.204.236.214:8089/tanyu.jpeg',Quata:'400',Coins:'500',Deal_Valid_Till:'2020-12-26',Detail:'Student discount'},
+      // etc.
+    ]);
   }
   
-  await Oolong.createEach([
-    { Title: "50%discount", Restaurant:'Haidilao',Region:'HK Island',Mall:'IFC Mall',Image:'http://129.204.236.214:8089/haidilao.jpeg',Quata:'600',Coins:'700',Deal_Valid_Till:'2020-12-31',Detail:'just feel free to eat hot poooooot'},
-    { Title: "Roast Meat Buy one get one free", Restaurant:'ShaolaDian',Region:'HK Island',Mall:'Pacific Place',Image:'http://129.204.236.214:8089/shaola.jpg',Quata:'400',Coins:'600',Deal_Valid_Till:'2020-12-30',Detail:' Buy one get one free ! '},
-    { Title: "$20 discount for $500", Restaurant:'Diandude',Region:'Kowloon',Mall:'Elements"',Image:'http://129.204.236.214:8089/diandude.jpg',Quata:'400',Coins:'500',Deal_Valid_Till:'2020-12-29',Detail:'Traditional Guangdong cuision'},
-    { Title: "KFC Children's package with toys!", Restaurant:'KFC',Region:'Kowloon',Mall:'Harbour City',Image:'http://129.204.236.214:8089/kfc.jpg',Quata:'300',Coins:'500',Deal_Valid_Till:'2020-12-28',Detail:'Welcome to'},
-    { Title: "30% Discount for family combo", Restaurant:'Seafood of Japanese cuisine',Region:'New Territories',Mall:'New Town Plaza',Image:'http://129.204.236.214:8089/japaneseSeafood.jpg',Quata:'400',Coins:'500',Deal_Valid_Till:'2020-12-27',Detail:'for family(over 4 people) '},
-    { Title: "Public Holiday 20% discount for all food", Restaurant:'Tanyu',Region:'New Territories',Mall:'Tsuen Wan Plaza',Image:'http://129.204.236.214:8089/tanyu.jpeg',Quata:'400',Coins:'500',Deal_Valid_Till:'2020-12-26',Detail:'Student discount'},
-    // etc.
-  ]);
 
-  return generateUsers();
-  
+  //default users information 
+  if (await User.count() == 0) { 
+    return generateUsers(); // generate users after dataitems read.
+  }
   async function generateUsers() {
   
     if (await User.count() > 0) {
@@ -60,5 +62,13 @@ module.exports.bootstrap = async function() {
     ]);
   }
 
+  //default members with coupons association
+  const Haidilao = await Oolong.findOne({Restaurant: "Haidilao"});
+  const KFC = await Oolong.findOne({Restaurant: "KFC"});
+  const Tom = await User.findOne({username: "Tom"});
+  const Jerry = await User.findOne({username: "Jerry"});
+
+  await User.addToCollection(Tom.id, 'coupons').members(Haidilao.id);
+  await User.addToCollection(Jerry.id, 'coupons').members(KFC.id);
   
 };
