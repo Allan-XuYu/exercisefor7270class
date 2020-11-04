@@ -206,15 +206,28 @@
         }           
     }
 
-    var username = '<%= req.session.username %>';
-
-    if(username) // Logined
+    var role = '<%= req.session.role %>';
+    if(role=="admin") // Logined
     {
       var logButton = document.getElementById("log");
       //logButton.setAttribute("method","POST");
       logButton.setAttribute("href","/user/logout");
       logButton.innerHTML='Log out';
       document.getElementById("sign").setAttribute("style","display:none");
+    }
+    else if(role=="member")
+    {
+      var logButton = document.getElementById("log");
+      //logButton.setAttribute("method","POST");
+      logButton.setAttribute("href","/user/logout");
+      logButton.innerHTML='Log out';
+      document.getElementById("sign").setAttribute("style","display:none");
+      document.getElementById("create").setAttribute("style","display:none");
+      document.getElementById("admin").setAttribute("style","display:none");
+
+      // Self-information -redeem
+
+      //
     }
     else // Non-member
     {

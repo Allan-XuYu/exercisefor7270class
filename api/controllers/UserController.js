@@ -24,7 +24,8 @@ module.exports = {
 
         // Reuse existing session 
         if (!req.session.username) {
-            req.session.username = user.username; 
+            req.session.username = user.username;
+            req.session.role = user.role; 
             return res.json(user);
         }
         
@@ -32,7 +33,7 @@ module.exports = {
         req.session.regenerate(function (err) {
     
             if (err) return res.serverError(err);
-    
+            req.session.role = user.role; 
             req.session.username = user.username;   
             return res.json(user);
         });
@@ -46,6 +47,47 @@ module.exports = {
             
             return res.redirect("/");        
         });
+    },
+
+    populate: async function (req, res) {
+
+        var user = await User.findOne(req.params.id).populate("clients");
+    
+        if (!user) return res.notFound();
+    
+        return res.json(user);
+    },
+
+    add: async function (req, res) {
+
+        if (!await User.findOne(req.params.id)) return res.status(404).json("User not found.");
+        
+        var thatPerson = await Person.findOne(req.params.fk).populate("consultants", {id: req.params.id});
+    
+        if (!thatPerson) return res.status(404).json("Person not found.");
+            
+        if (thatPerson.consultants.length > 0)
+            return res.status(409).json("Already added.");   // conflict
+        
+        await User.addToCollection(req.params.id, "clients").members(req.params.fk);
+    
+        return res.ok();
+    },
+
+    remove: async function (req, res) {
+
+        if (!await User.findOne(req.params.id)) return res.status(404).json("User not found.");
+        
+        var thatPerson = await Person.findOne(req.params.fk).populate("consultants", {id: req.params.id});
+        
+        if (!thatPerson) return res.status(404).json("Person not found.");
+    
+        if (thatPerson.consultants.length == 0)
+            return res.status(409).json("Nothing to delete.");    // conflict
+    
+        await User.removeFromCollection(req.params.id, "clients").members(req.params.fk);
+    
+        return res.ok();
     },
 
 };
