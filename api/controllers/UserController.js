@@ -66,15 +66,34 @@ module.exports = {
         if (!user) return res.status(404).json("User not found.");
         
         var thatCoupon = await Oolong.findOne(req.params.fk).populate("clients", {id: user.id});
-    
+      
         if (!thatCoupon) return res.status(404).json("Coupon not found.");
             
         if (thatCoupon.clients.length > 0)
             return res.status(409).json("Already added.");   // conflict
         
-        await User.addToCollection(user.id, "coupons").members(req.params.fk);
-    
-        return res.ok();
+        // normal redeem
+        if(thatCoupon.Quata>0 && user.coins>thatCoupon.Coins)
+        {
+            // update user coins 
+            user.coins =user.coins - thatCoupon.Coins;
+            await User.updateOne(user.id).set(user);
+            // update coupons quata
+            var restaurant= await Oolong.findOne(req.params.fk);
+            restaurant.Quata =thatCoupon.Quata-1;
+            await Oolong.updateOne(restaurant.id).set(restaurant);
+            // add association    
+            await User.addToCollection(user.id, "coupons").members(req.params.fk);
+        
+            return res.ok();
+
+        } 
+        else// Quata not enough or member do not have enough coins
+        {
+            return res.status(409).json("haven't enough coins or quata");   // conflict
+        }
+
+
     },
 
     // remove: async function (req, res) {
