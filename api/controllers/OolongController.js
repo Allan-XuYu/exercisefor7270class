@@ -178,7 +178,7 @@ module.exports = {
 
             if (!updatedInfo) return res.notFound();
 
-            return res.ok();
+            return res.redirect('/');
         }
     },
 
@@ -188,8 +188,13 @@ module.exports = {
         var deletedInfo = await Oolong.destroyOne(req.params.id);
 
         if (!deletedInfo) return res.notFound();
-
-        return res.ok(); 
+        
+        if (req.wantsJSON){
+            
+            return res.status(204).send();	    // for ajax request
+        } else {
+            return res.redirect('/');			// for normal request
+        }
     },
 
 
@@ -272,6 +277,13 @@ module.exports = {
         if (!restaurant) return res.notFound();
     
         return res.json(restaurant);
+    },
+
+
+    redeemedM: async function (req, res) {
+    
+        //console.log(req.params.id);
+        return res.view('oolong/redeemedM',{couponsID:req.params.id});
     },
 };
 

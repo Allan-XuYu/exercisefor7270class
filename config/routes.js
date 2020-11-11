@@ -48,8 +48,9 @@ module.exports.routes = {
  'GET /oolong/update/:id': 'OolongController.update',
  'POST /oolong/update/:id': 'OolongController.update',
 
- 'POST /oolong/delete/:id': 'OolongController.delete', // all access DB just using POST
- 
+ //'POST /oolong/delete/:id': 'OolongController.delete', // all access DB just using POST
+ 'DELETE /oolong/:id': 'OolongController.delete',
+
  'GET /oolong/detail/:id': 'OolongController.detail',
 
  'POST /oolong/search': 'OolongController.search',
@@ -69,4 +70,5 @@ module.exports.routes = {
   'POST /user/:username/coupons/remove/:fk': 'UserController.remove',
 
   'GET /user/redeemed': 'UserController.redeemed',
+  'GET /oolong/redeemedM/:id': 'OolongController.redeemedM',
 };

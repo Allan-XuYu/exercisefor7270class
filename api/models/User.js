@@ -19,13 +19,14 @@ module.exports = {
     },
     
     password: {
-      type: "string"
+      type: "string",
+      required: true
     },
 
     role: {
       type: 'string',
       isIn: ['admin', 'member'],
-      defaultsTo: 'member'
+      defaultsTo: 'member',
     },    
 
     coins: {

@@ -13,39 +13,48 @@ module.exports = {
     //  ╠═╝╠╦╝║║║║║ ║ ║╚╗╔╝║╣ ╚═╗
     //  ╩  ╩╚═╩╩ ╩╩ ╩ ╩ ╚╝ ╚═╝╚═╝
     Restaurant: {
-      type: "string"
+      type: "string",
+      required: true
     },
     
     Title: {
-      type: "string"
+      type: "string",
+      required: true
     },
 
     Region: {
-      type: "string"
+      type: "string",
+      required: true
     },
     
     Mall: {
-      type: "string"
+      type: "string",
+      required: true
     },
     Image: {
-      type: "string"
+      type: "string",
+      required: true
     },
     
     Quata: {
-      type: "number"
+      type: "number",
+      required: true
     },
 
     Coins: {
-      type: "number"
+      type: "number",
+      required: true
     },
 
     Deal_Valid_Till: {
       type: "string",
-      columnType:'date'
+      columnType:'date',
+      required: true
     },
     
     Detail: {
-      type: "string"
+      type: "string",
+      required: true
     },
     
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗

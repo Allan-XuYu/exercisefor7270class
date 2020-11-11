@@ -158,6 +158,28 @@
 
 <form action="/oolong/delete/<%= info.id %>" method="POST">
     <div class="column">
-        <button class="button is-danger" type="submit">Delete</button>
+        <button class="button is-danger" type="button" onclick="Delete()">Delete</button>
     </div>
 </form>
+<script>
+
+    async function Delete()
+    {
+        var r = confirm("Confirm Delete?");
+        if(r)
+        {
+            var response = await fetch("/oolong/" + "<%= info.id %>", {method: "DELETE"});
+            if (response.ok) {
+                alert("Coupons deleted.");
+                location.assign("/");
+            } else {
+                alert(response.status + ": " + response.statusText);
+            }
+        }
+        else
+        {
+            alert("cancelled");
+        }
+        
+    }
+</script>

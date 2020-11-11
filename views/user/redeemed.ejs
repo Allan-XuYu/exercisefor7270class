@@ -35,7 +35,7 @@
     {  
         var JsonData = await response.json();
 
-        document.getElementById("current coins").innerHTML = '<strong>Current Balance:'+JsonData.coins+'</strong>';
+        document.getElementById("current coins").innerHTML = '<strong>Current Balance:'+JsonData.coins+'coins</strong>';
 
         //console.log(JsonData.coupons.length);
         var dynamicCode='';
@@ -78,7 +78,7 @@
         {third_flag='</div>';} // for div class="columns"
 
         document.getElementById("dynamic").innerHTML = dynamicCode+third_flag ;
-        console.log(dynamicCode);
+        //console.log(dynamicCode);
     }
  }
 
