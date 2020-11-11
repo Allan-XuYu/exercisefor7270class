@@ -67,4 +67,6 @@ module.exports.routes = {
   'GET /user/:username/coupons': 'UserController.populate',
   'POST /user/:username/coupons/add/:fk': 'UserController.add',  // using username replace id
   'POST /user/:username/coupons/remove/:fk': 'UserController.remove',
+
+  'GET /user/redeemed': 'UserController.redeemed',
 };

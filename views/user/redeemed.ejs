@@ -1,0 +1,87 @@
+<style>
+    #RestaurantDetail{ color:rgb(0, 7, 12)}
+    #RestaurantExpiry{ color:rgb(0, 7, 12)}
+</style>
+<section class="section">
+    <div class="container">
+        <div class="columns">
+            <div class="column">
+                <h2 class="content">
+                    <strong>Redeemed Coupons:</strong>
+                </h2>
+            </div>
+            <div class="column">
+                <h2 class="content" id ="current coins">
+                    <strong>Current Balance: </strong>
+                </h2>
+            </div>
+          </div>
+    </div>
+</section>
+
+<section class="section" id='dynamic'>
+        
+</section>
+
+<script>
+
+ async function accessDB()
+ {
+    var username='<%= req.session.username %>'
+    var response = await fetch('/user/'+ username +'/coupons', {
+              method: "GET"
+          });
+    if (response.ok) 
+    {  
+        var JsonData = await response.json();
+
+        document.getElementById("current coins").innerHTML = '<strong>Current Balance:'+JsonData.coins+'</strong>';
+
+        //console.log(JsonData.coupons.length);
+        var dynamicCode='';
+        for(i=0;i< JsonData.coupons.length;i++)
+        {
+            ID=JsonData.coupons[i]['id'];
+            Image=JsonData.coupons[i]['Image'];
+            Restaurant=JsonData.coupons[i]['Restaurant'];
+            Detail=JsonData.coupons[i]['Detail'];
+            ExpiryDate=JsonData.coupons[i]['Deal_Valid_Till'];
+            //console.log((i+1)%3);
+            if( (i+1)%3 == 1) // first column
+            {
+                dynamicCode+='<div class="columns">';
+            }
+         
+            dynamicCode+='<div class="column card">\
+                        <a href="/oolong/detail/'+ID+'">\
+                        <div class="column">\
+                            <figure class="image is-square">\
+                                <img style="object-fit:cover" src="'+ Image+'" />\
+                            </figure>\
+                            <div class="notification">\
+                                <div class="content is-medium" id="RestaurantName">'+Restaurant+'</div>\
+                                <div class="content is-small" id="RestaurantDetail">'+Detail+'</div>\
+                                <div class="content is-small" id="RestaurantExpiry">'+ExpiryDate+'</div>\
+                            </div>\
+                        </div>\
+                    </a>\
+                    </div>'
+            
+            if( (i+1)%3 == 0) // third column
+            {
+                dynamicCode+='</div>';
+            }
+        }
+
+        var third_flag='';
+        if(JsonData.coupons.length %3 !=0)
+        {third_flag='</div>';} // for div class="columns"
+
+        document.getElementById("dynamic").innerHTML = dynamicCode+third_flag ;
+        console.log(dynamicCode);
+    }
+ }
+
+ accessDB();
+
+</script>

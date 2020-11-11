@@ -67,6 +67,9 @@
           Admin
         </a>
 
+        <a class="navbar-item" href="/user/redeemed" id="redeemed">
+          My Redeemed Coupons
+        </a>
       </div>
   
       <div class="navbar-end">
@@ -214,6 +217,7 @@
       logButton.setAttribute("href","/user/logout");
       logButton.innerHTML='Log out';
       document.getElementById("sign").setAttribute("style","display:none");
+      document.getElementById("redeemed").setAttribute("style","display:none");
     }
     else if(role=="member")
     {
@@ -224,9 +228,8 @@
       document.getElementById("sign").setAttribute("style","display:none");
       document.getElementById("create").setAttribute("style","display:none");
       document.getElementById("admin").setAttribute("style","display:none");
-
       // Self-information -redeem
-
+      
       //
     }
     else // Non-member
@@ -239,7 +242,7 @@
       document.getElementById("create").setAttribute("style","display:none");
       document.getElementById("admin").setAttribute("style","display:none");
       document.getElementById("client name").setAttribute("style","display:none");
-      
+      document.getElementById("redeemed").setAttribute("style","display:none");
     } //
 
   </script>

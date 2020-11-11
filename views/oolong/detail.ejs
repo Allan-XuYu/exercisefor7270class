@@ -31,12 +31,38 @@
   </div>
 
 <script>
-  //only member can see redeem button
-  var role = '<%= req.session.role %>';
-  console.log(role);
-  if(role!='member')
+  //checing if the member have redeemed this coupon or not!
+  async function Checking()
   {
-    document.getElementById("button").style= "display:none";
+    var ID='<%= info.id %>';
+    var response = await fetch('/oolong/'+ ID +'/clients', {
+              method: "GET"
+          });
+    if (response.ok) 
+    {  
+      var JsonData = await response.json();
+      JsonData.clients.forEach( function(client) {
+        if(client['username']=='<%= req.session.username %>')
+        {
+          document.getElementById("button").style= "display:none";
+        }
+      });
+    }
+    else {
+      alert(response.status + ": " + response.statusText);   
+    }
   }
+  
+
+//only member who have not redeemed this,can see redeem button
+var role = '<%= req.session.role %>';
+if(role!='member')
+{
+  document.getElementById("button").style= "display:none";
+}
+else
+{
+  Checking();
+}
 
 </script>

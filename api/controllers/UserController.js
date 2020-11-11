@@ -57,8 +57,14 @@ module.exports = {
         if (!user) return res.notFound();
     
         return res.json(user);
+        //console.log(user);
+        //return res.view('user/redeemed', { member: user});
     },
 
+    redeemed: async function (req, res) {
+        return res.view('user/redeemed');
+    },
+    
     add: async function (req, res) {
 
        
