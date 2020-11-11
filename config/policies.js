@@ -20,6 +20,14 @@ module.exports.policies = {
   // '*': true,
 
   OolongController: {
-    create: 'isAdmin'
+    create: 'isAdmin',
+    delete: 'isAdmin',
+    update: 'isAdmin',
+    redeemedM: 'isAdmin',
+  },
+
+  UserController: {
+    add: 'isMember',
+    redeemed: 'isMember',
   }
 };
