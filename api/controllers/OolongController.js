@@ -10,10 +10,15 @@ module.exports = {
     create: async function (req, res) {
 
         if (req.method == "GET") return res.view('oolong/create');
-        
+
         var oolong = await Oolong.create(req.body).fetch();
 
-        return res.status(201).json({ id: oolong.id });
+        //return res.status(201).json({ id: oolong.id });
+        if (req.wantsJSON){
+            return res.status(201).send({ id: oolong.id });	    // for ajax request
+        } else {
+            return res.redirect('/');			// for normal request
+        }
     },
     // Homepage page by create action
     home : async function (req, res) {
@@ -178,7 +183,11 @@ module.exports = {
 
             if (!updatedInfo) return res.notFound();
 
-            return res.redirect('/');
+            if (req.wantsJSON){
+                return res.status(200).send();	    // for ajax request
+            } else {
+                return res.redirect('/');			// for normal request
+            }
         }
     },
 

@@ -1,5 +1,5 @@
 <!--create.ejs-->
-<form action="/oolong/create" method="post">
+<form form action="/oolong" method="POST" onsubmit="Create(this);return false">
     <div class="columns"> 
         <div class="column is-half">
             <div class="field">
@@ -96,7 +96,7 @@
             <div class="column">
                 <div class="field">
                     <div class="control">
-                        <button class="button is-link" type="submit">Submit</button>
+                        <button class="button is-link">Submit</button>
                     </div>
                 </div>
             </div>
@@ -151,5 +151,32 @@
                 mallElem.disabled = true; //flag switch to disabled select
             }
         }
+
+
     </script>
 </form>
+
+<script>
+    async function Create(formElem)
+    {
+        var r = confirm("Confirm Create?");
+    
+        if (r) {
+            var response = await fetch(formElem.action, {
+                method:formElem.method,
+                body: new FormData(formElem),
+            });
+
+            if (response.ok) {
+                var message = await response.text();
+                alert("Coupons created."+message);
+                location.assign("/");
+            } else {
+                alert(response.status + ": " + response.statusText);
+            }
+
+        } else {
+            alert("cancelled");
+        }
+    }
+</script>

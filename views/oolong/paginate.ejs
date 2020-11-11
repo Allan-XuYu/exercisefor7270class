@@ -6,7 +6,7 @@
 <div class="columns" id="main column">
     <% infos.forEach( function(info) { %>
     <div class="column card">
-        <a href='/oolong/detail/<%= info.id %>'>
+        <a href='/oolong/<%= info.id %>'>
             <div class="column">
                 <figure class="image is-square">
                     <img style="object-fit:cover" src="<%= info.Image %>" />
@@ -213,7 +213,7 @@
 
             JsonData.forEach(function (member) {
                 dynamicCode +='<div class="column card ">';
-                dynamicCode +='<a href="/oolong/detail/'+ member.id +'">';
+                dynamicCode +='<a href="/oolong/'+ member.id +'">';
                 dynamicCode +='<div class="column">';
                 dynamicCode +='<figure class="image is-square">';
                 dynamicCode +='<img style="object-fit:cover" src="'+ member.Image + '" />';
@@ -315,7 +315,7 @@
             
             JsonData.forEach(function (member) {
                 dynamicCode +='<div class="column card ">';
-                dynamicCode +='<a href="/oolong/detail/'+ member.id +'">';
+                dynamicCode +='<a href="/oolong/'+ member.id +'">';
                 dynamicCode +='<div class="column">';
                 dynamicCode +='<figure class="image is-square">';
                 dynamicCode +='<img style="object-fit:cover" src="'+ member.Image + '" />';
@@ -426,7 +426,7 @@
 
                 JsonData.forEach(function (member) {
                     dynamicCode +='<div class="column card ">';
-                    dynamicCode +='<a href="/oolong/detail/'+ member.id +'">';
+                    dynamicCode +='<a href="/oolong/'+ member.id +'">';
                     dynamicCode +='<div class="column">';
                     dynamicCode +='<figure class="image is-square">';
                     dynamicCode +='<img style="object-fit:cover" src="'+ member.Image + '" />';
@@ -550,7 +550,7 @@
             
                 JsonData.forEach(function (member) {
                     dynamicCode +='<div class="column card ">';
-                    dynamicCode +='<a href="/oolong/detail/'+ member.id +'">';
+                    dynamicCode +='<a href="/oolong/'+ member.id +'">';
                     dynamicCode +='<div class="column">';
                     dynamicCode +='<figure class="image is-square">';
                     dynamicCode +='<img style="object-fit:cover" src="'+ member.Image + '" />';

@@ -1,5 +1,5 @@
 <!--update.ejs-->
-<form action="/oolong/update/<%= info.id %>" method="post">
+<form action="/oolong/<%= info.id %>" onsubmit="Update(this);return false">
     <div class="columns"> 
         <div class="column is-half">
             <div class="field">
@@ -156,11 +156,11 @@
     </script>
 </form>
 
-<form action="/oolong/delete/<%= info.id %>" method="POST">
+<!-- <form action="/oolong/delete/<%= info.id %>" method="POST"> -->
     <div class="column">
         <button class="button is-danger" type="button" onclick="Delete()">Delete</button>
     </div>
-</form>
+<!-- </form> -->
 <script>
 
     async function Delete()
@@ -181,5 +181,28 @@
             alert("cancelled");
         }
         
+    }
+
+    async function Update(formElem)
+    {
+        var r = confirm("Confirm Update?");
+    
+        if (r) {
+            var response = await fetch(formElem.action, {
+                method:'PUT',
+                body: new FormData(formElem),
+            });
+
+            if (response.ok) {
+                var message = await response.text();
+                alert("Coupons updated."+message);
+                location.assign("/");
+            } else {
+                alert(response.status + ": " + response.statusText);
+            }
+
+        } else {
+            alert("cancelled");
+        }
     }
 </script>
